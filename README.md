@@ -460,5 +460,5 @@ Results
 | Run 6    | 3 min 44.34 sec  | 4.1686
 | Run 7    |3 min 28.06 sec | 3.7717 
 | Run 8    | 3 min 50.30 sec  | 3.8911
-| Average  | 2 min 50.94 sec | 5.6562
+| Average  | 3 min 10.42 sec | 5.6562
  
