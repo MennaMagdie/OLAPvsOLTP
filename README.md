@@ -66,17 +66,17 @@ group by
 
 ![alt text](image.png)
 
-| Run | Time |
+| Run | OLTP (min) | 
 |----------|----------|
-| Run 1    | 2 min 50.94 sec |
-| Run 2    | x 2  |
-| Run 3    | x 3  |
-| Run 4    | x 4  |
-| Run 5    | x 5  |
-| Run 6    | x 6  |
-| Run 7    | x 7  |
-| Run 8    | x 8  |
-| Average  | average time |
+| Run 1    | 2 min 50.94 sec | 
+| Run 2    | 3 min 11.49 sec  | 
+| Run 3    | 2 min 39.52 sec  | 
+| Run 4    | 2 min 55.83 sec | 
+| Run 5    | 2 min 42.87 sec  | 
+| Run 6    | 3 min 44.34 sec  | 
+| Run 7    |3 min 28.06 sec | 
+| Run 8    | 3 min 50.30 sec  | 
+| Average  | 3 min 10.42 sec | 
 
 
 
@@ -452,13 +452,13 @@ Results
 
 | Run | OLTP (min) | OLAP (sec)|
 |----------|----------|----------|
-| Run 1    | 2 min 50.94 sec | 14.9295
-| Run 2    | 3 min 11.49 sec  | 5.5913
-| Run 3    | 2 min 39.52 sec  | 4.3731
-| Run 4    | 2 min 55.83 sec | 4.2921
-| Run 5    | 2 min 42.87 sec  | 4.2324 
-| Run 6    | 3 min 44.34 sec  | 4.1686
-| Run 7    |3 min 28.06 sec | 3.7717 
-| Run 8    | 3 min 50.30 sec  | 3.8911
-| Average  | 3 min 10.42 sec | 5.6562
+| Run 1    | 2 min 50.94 sec | 14.9295 sec
+| Run 2    | 3 min 11.49 sec  | 5.5913 sec
+| Run 3    | 2 min 39.52 sec  | 4.3731 sec
+| Run 4    | 2 min 55.83 sec | 4.2921 sec
+| Run 5    | 2 min 42.87 sec  | 4.2324 sec
+| Run 6    | 3 min 44.34 sec  | 4.1686 sec
+| Run 7    |3 min 28.06 sec | 3.7717 sec
+| Run 8    | 3 min 50.30 sec  | 3.8911 sec
+| Average  | 3 min 10.42 sec | 5.6562 sec
  
