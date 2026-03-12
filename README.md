@@ -1,4 +1,7 @@
-# TPCH Data Warehouse Lab – Full Workflow
+# DESIGNING DATA INTENSIVE APPLICATIONS
+# LAB01: TPCH Data Warehouse Lab
+
+
 
 ## 1. Preparing the OLTP Database
 
@@ -76,6 +79,15 @@ group by
 | Average  | average time |
 
 
+
+Problems:
+
+![alt text](image-4.png)
+
+
+Solution:
+
+![alt text](image-3.png)
 ---
 
 # 3. Designing the Star Schema
@@ -91,7 +103,7 @@ A star schema improves performance for analytical queries by reducing the number
 
 # 4. Designing the ETL Process
 
-The ETL process converts the **OLTP schema into the star schema**.
+The ETL process converts the **OLTP schema into the star schema**. It reads from MySQL, performs the transformation into star schema, and loads the data into parquet files. 
 
 ETL stages:
 
@@ -101,18 +113,16 @@ Extract → Transform → Load
 
 ## Extract
 
-Data is extracted from the OLTP MySQL tables.
-
-mesh 3arfa akteb eh hena
+Data is extracted from the OLTP MySQL tables. This stage only involves fetching the data from the source tables and providing input for the transformation stage.
 
 ---
 
 ## Transform
 
-Transformations include:
-
-mesh 3arfa akteb eh hena
-
+The data is converted into a target structure appropriate for OLAP supported schemas, which is the Star Schema here. Some operations to achieve this transformation include:
+- Table joins
+- Filter on rows
+- Denormalizing normalized schemas
 ---
 
 ## Load
@@ -120,12 +130,9 @@ mesh 3arfa akteb eh hena
 The transformed data is stored in **Parquet format**.
 
 Parquet was chosen because:
-
 - Columnar storage
 - High compression
-- Optimized for analytical engines
-
-mesh 3arfa akteb eh hena
+- Optimized for analytical engines (Spark OLAP queries)
 
 ---
 
@@ -237,17 +244,26 @@ Password
 
 # 8. Generating Parquet Files with NiFi
 
-NiFi processors are used to execute the ETL workflow.
+NiFi processors are used to execute the ETL workflow. Prcoessors were selected to serve each stage of the ETL pipeline:
+* **Extract**: ExecuteSQL processor takes the input data from the batch fetching output from the processor GenerateTableFetch, and executes SQL statements to read from the OLTP tables. The batching is vital to avoid OOM errors in NiFi.
+* **Transform**: ConvertAvroToParquet takes the Avro-format data from ExecuteSQL and transforms it into a columnar format (Parquet).
+* **Load**: PutFile and PutParquet ensure that parquet data is saved to a local file system and is persisted in the same format for later processing. 
 
 Typical pipeline:
 
 ```
+GenerateTableFetch
+      ↓
 ExecuteSQL
       ↓
-ConvertRecord
+ConvertAvroToParquet
+      ↓
+PutFile
       ↓
 PutParquet
 ```
+
+![alt text](<Screenshot from 2026-03-11 04-17-26.png>)
 
 Output files generated:
 
@@ -438,11 +454,11 @@ Results
 |----------|----------|----------|
 | Run 1    | 2 min 50.94 sec | 14.9295
 | Run 2    | 3 min 11.49 sec  | 5.5913
-| Run 3    | 2 min 50.94 sec  | 4.3731
-| Run 4    | 2 min 50.94 sec | 4.2921
-| Run 5    | 2 min 50.94 sec  | 4.2324 
-| Run 6    | 2 min 50.94 sec  | 4.1686
-| Run 7    |2 min 50.94 sec | 3.7717 
-| Run 8    | 2 min 50.94 sec  | 3.8911
+| Run 3    | 2 min 39.52 sec  | 4.3731
+| Run 4    | 2 min 55.83 sec | 4.2921
+| Run 5    | 2 min 42.87 sec  | 4.2324 
+| Run 6    | 3 min 44.34 sec  | 4.1686
+| Run 7    |3 min 28.06 sec | 3.7717 
+| Run 8    | 3 min 50.30 sec  | 3.8911
 | Average  | 2 min 50.94 sec | 5.6562
  
