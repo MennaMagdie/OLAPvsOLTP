@@ -259,8 +259,6 @@ ExecuteSQL
 ConvertAvroToParquet
       ↓
 PutFile
-      ↓
-PutParquet
 ```
 
 ![alt text](<Screenshot from 2026-03-11 04-17-26.png>)
